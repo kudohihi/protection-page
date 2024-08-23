@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang bảo vệ mật khẩu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #61dafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #container {
+            text-align: center;
+            background-color: #20232a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        #lock {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #61dafb;
+        }
+        input[type="password"], button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+        }
+        input[type="password"] {
+            background-color: #282c34;
+            color: #61dafb;
+            border: 1px solid #61dafb;
+        }
+        button {
+            background-color: #61dafb;
+            color: #20232a;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #21a1f1;
+        }
+        #showPassword {
+            color: #61dafb;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="lock">🔒</div>
+        <h1>Vui lòng nhập mật khẩu để truy cập trang</h1>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="Mật khẩu" required>
+            <div id="showPassword">
+                <input type="checkbox" id="togglePassword"> Hiển thị mật khẩu
+            </div>
+            <button type="submit">Mở khóa</button>
+        </form>
+        <div id="content" style="display:none;">
+            <h2>Test Thôi Mà Xem Làm Gì?</h2>
+            <p>Request ID: </p><code>2boc49zA0ctoArAza3o0cd5c39a0s9xzZ0a9aC47</code>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("passwordForm").style.display = "block";
+
+        document.getElementById("passwordForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const password = document.getElementById("password").value;
+            const correctPassword = "TestThôiMàXemLàmGì?";
+
+            if (password === correctPassword) {
+                document.getElementById("passwordForm").style.display = "none";
+                document.getElementById("lock").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            } else {
+                alert("Mật khẩu không đúng, vui lòng thử lại.");
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert("Chức năng này bị khóa vì chỉ dành cho developers.");
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'j') || e.key === 'F12') {
+                e.preventDefault();
+                alert("Chức năng này bị khóa vì chỉ dành cho developers.");
+            }
+        });
+
+        document.getElementById("togglePassword").addEventListener("change", function() {
+            const passwordField = document.getElementById("password");
+            if (this.checked) {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        });
+    </script>
+
+</body>
+</html>
